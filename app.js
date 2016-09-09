@@ -11,7 +11,7 @@ module.exports = {
     html: '*(**/)*.sgr',
     css: '*(**/)*.sss'
   },
-  ignore: ['**/layouts/*', '**/_*', '**/.*', 'cache/**'],
+  ignore: ['**/layouts/*', '**/_*', '**/.*', '_cache/**', 'readme.md'],
   reshape: (ctx) => {
     return htmlStandards({
       webpack: ctx,
@@ -22,8 +22,10 @@ module.exports = {
     return cssStandards({ webpack: ctx })
   },
   babel: { presets: [jsStandards] },
-  recordsPath: path.join(__dirname, 'records.json'),
+  recordsPath: path.join(__dirname, '_cache/records.json'),
   plugins: [
-    new HardSource({ cacheDirectory: '../cache' })
+    new HardSource({
+      cacheDirectory: path.join(__dirname, '_cache/hard_source_cache')
+    })
   ]
 }
